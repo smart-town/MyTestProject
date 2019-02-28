@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>smalltown</groupId>
-  <artifactId>myproject</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+	<groupId>smalltown</groupId>
+	<artifactId>myproject</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-  <name>myproject</name>
-  <url>http://maven.apache.org</url>
+	<name>myproject</name>
+	<url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.version>5.1.3.RELEASE</spring.version>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.version>5.1.3.RELEASE</spring.version>
+	</properties>
 
-  <dependencies>
-    <dependency>
+	<dependencies>
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
@@ -62,12 +64,19 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
-  </dependencies>
-  <modules>
-    <module>test</module>
-    <module>myfront</module>
-    <module>backstage</module>
-    <module>utils</module>
-    <module>repository</module>
-  </modules>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	<modules>
+		<module>test</module>
+		<module>myfront</module>
+		<module>backstage</module>
+		<module>utils</module>
+		<module>repository</module>
+	</modules>
 </project>
