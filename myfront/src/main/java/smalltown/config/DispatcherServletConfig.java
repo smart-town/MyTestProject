@@ -15,7 +15,6 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -70,7 +69,7 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
 		templateResolver.setTemplateMode(TemplateMode.HTML);
 		return templateResolver;
 	}
-	
+
 //	deal multipart
 	@Bean
 	public MultipartResolver multipartResolver() throws IOException {
