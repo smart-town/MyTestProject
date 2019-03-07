@@ -70,7 +70,6 @@ public class JdbcConfig implements EnvironmentAware{ //此处继承EnvironmentAw
 	}
 
 	@Bean
-	@Profile("test")
 	public JdbcTemplate jdbcTemplate(@Value("${pattern}") String mode){
 		System.out.println("设置 jdbcTemplate,数据源:"+mode);
 		JdbcTemplate res = new JdbcTemplate() ;

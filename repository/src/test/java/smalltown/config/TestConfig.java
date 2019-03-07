@@ -26,6 +26,6 @@ public class TestConfig {
 	public void log(){
 		System.out.println("====Test====");
 		User user = userRepository.getUserById("1") ;
-		System.out.println(user.getName());
+		System.out.println(user);
 	}
 }
