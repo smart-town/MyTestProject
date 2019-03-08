@@ -50,6 +50,13 @@
 	    <version>1.0.0.Final</version>
 	</dependency>
 
+	<!-- jpa 自动化 -->
+	<dependency>
+	    <groupId>org.springframework.data</groupId>
+	    <artifactId>spring-data-jpa</artifactId>
+	    <version>2.1.5.RELEASE</version>
+	</dependency>
+
 
   </dependencies>
 </project>

@@ -1,5 +1,6 @@
 package smalltown.config;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,12 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
@@ -33,6 +36,7 @@ import smalltown.repositoryimpl.RepositoryImplScanFlag;
 
 @Configuration
 @PropertySource("classpath:dbconfig.properties")
+@EnableJpaRepositories(basePackages={"smalltown.repositoryimpl"})
 public class JdbcConfig implements EnvironmentAware{ //此处继承EnvironmentAware 是因为@Autowired Env 为 null？原因？
 	@Autowired
 	Environment env ;
@@ -112,7 +116,17 @@ public class JdbcConfig implements EnvironmentAware{ //此处继承EnvironmentAw
 	}
 
 	@Bean
+	@Qualifier("embeded")
+	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
+		JpaTransactionManager res = new JpaTransactionManager() ;
+		res.setEntityManagerFactory(entityManagerFactory);
+		return res;
+	}
+
+	@Bean
 	public BeanPostProcessor persistenceTranslation(){
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
+
+
 }

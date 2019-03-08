@@ -3,7 +3,10 @@ package smalltown.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Proxy;
+
 @Entity
+@Proxy(lazy=false)
 public class User {
 	@Id
 	private int id;
@@ -35,6 +38,6 @@ public class User {
 		this.password = password;
 	}
 	public String toString(){
-		return "User[name="+name+"id="+id+"status="+status+"]" ;
+		return "User[name="+name+",id="+id+",status="+status+"]" ;
 	}
 }
