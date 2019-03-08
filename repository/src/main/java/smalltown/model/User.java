@@ -1,5 +1,7 @@
 package smalltown.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,7 +9,8 @@ import org.hibernate.annotations.Proxy;
 
 @Entity
 @Proxy(lazy=false)
-public class User {
+public class User implements Serializable{
+	private static final long serialVersionUID = 1L;
 	@Id
 	private int id;
 	private int status;

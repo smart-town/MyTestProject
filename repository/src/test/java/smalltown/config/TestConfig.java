@@ -16,20 +16,23 @@ import smalltown.repositoryimpl.UserRepositoryJpaAuto;
 @ContextConfiguration(classes=RepositoryConfig.class)
 public class TestConfig {
 	@Autowired
-	@Qualifier("userRepositoryJpaImpl")
+	@Qualifier("UserJap")
 	UserRepository userRepository ;
 	@Autowired
 	UserRepositoryJpaAuto autoJpa ;
 
 	@Before
 	public void hello(){
-		System.out.println("=====Test About Repository=====");
+		System.out.println("=====Test About Repository-before=====");
 	}
 	@Test
 	public void log(){
 		System.out.println("====Test====");
 		User user = userRepository.getUserById("1") ;
 		System.out.println(user);
+
+		//两次调用测试缓存
+		System.out.println("=="+userRepository.getUserById("1"));
 	}
 
 	@Test

@@ -95,7 +95,7 @@ public class JdbcConfig implements EnvironmentAware{ //此处继承EnvironmentAw
 		switch(mode){
 			case "embeded" : res.setDataSource(embeddedDataSource()); break ;
 			case "jdbc" : res.setDataSource(jdbcDataSource()); break ;
-			default: ;
+			default: res.setDataSource(embeddedDataSource());
 		}
 		return res;
 	}

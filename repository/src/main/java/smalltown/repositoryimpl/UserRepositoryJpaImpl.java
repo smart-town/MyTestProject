@@ -19,7 +19,7 @@ public class UserRepositoryJpaImpl implements UserRepository {
 
 	@Override
 	public User getUserById(String id) {
-		System.out.println("JpaRepository");
+		System.out.println("JpaRepository-Get");
 		User result = emf.createEntityManager().find(User.class, Integer.parseInt(id)) ;
 		return result;
 	}
