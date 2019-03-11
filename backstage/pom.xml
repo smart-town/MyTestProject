@@ -24,5 +24,18 @@
   		<groupId>smalltown</groupId>
   		<version>${project.version}</version>
   	</dependency>
+
+	<dependency>
+	    <groupId>org.apache.activemq</groupId>
+	    <artifactId>activemq-core</artifactId>
+	    <version>5.7.0</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jms</artifactId>
+	    <version>5.1.5.RELEASE</version>
+	</dependency>
+
   </dependencies>
 </project>
