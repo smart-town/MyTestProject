@@ -14,6 +14,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
   <dependencies>
 	<dependency>
 	    <groupId>com.h2database</groupId>
@@ -23,7 +24,7 @@
 	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
-	    <version>6.0.6</version>
+	    <version>5.0.8</version><!-- 6.0.6 seems need something others --><!-- 5.1.38 seems change a system variable lower_case_name ? -->
 	</dependency>
 
 	<!-- Jpa 注解使用 -->

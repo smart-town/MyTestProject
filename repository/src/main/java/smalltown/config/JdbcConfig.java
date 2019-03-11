@@ -9,11 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
@@ -30,10 +27,6 @@ import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcesso
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
-import smalltown.entity.EntityScanFlag;
-import smalltown.repository.RepositoryScanFlag;
-import smalltown.repositoryimpl.RepositoryImplScanFlag;
-
 @Configuration
 @PropertySource("classpath:dbconfig.properties")
 @EnableJpaRepositories(basePackages={"smalltown.repositoryimpl"})
@@ -46,10 +39,10 @@ public class JdbcConfig implements EnvironmentAware{ //此处继承EnvironmentAw
 	@Conditional(DataSourceDecision.class)
 	public DataSource jdbcDataSource(){
 		DriverManagerDataSource ds = new DriverManagerDataSource() ;
-		ds.setDriverClassName(env.getProperty("driver"));
-		ds.setUrl(env.getProperty("url")) ;
-		ds.setUsername(env.getProperty("username"));
-		ds.setPassword(env.getProperty("password"));
+		ds.setDriverClassName(env.getProperty("rdb.driver"));
+		ds.setUrl(env.getProperty("rdb.url")) ;
+		ds.setUsername(env.getProperty("rdb.username"));
+		ds.setPassword(env.getProperty("rdb.password"));
 		return  ds ;
 	}
 

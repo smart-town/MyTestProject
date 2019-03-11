@@ -15,6 +15,14 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
+  <build>
+  </build>
   <dependencies>
+  	<dependency>
+  		<artifactId>repository</artifactId>
+  		<groupId>smalltown</groupId>
+  		<version>${project.version}</version>
+  	</dependency>
   </dependencies>
 </project>
