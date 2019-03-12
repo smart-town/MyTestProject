@@ -1,13 +1,16 @@
-package smalltown.config;
+package smalltown.messagetest;
 
 import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 
-@Configuration
+//@Configuration
+//@ComponentScan
+//@ImportResource(value={"classpath:jmslistener.xml"})
 public class ActiveMQConfig {
 	@Bean
 	public ActiveMQConnectionFactory connectionFactory(){

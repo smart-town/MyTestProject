@@ -18,7 +18,7 @@ public class BackStageApp
     {
     	ApplicationContext ctx = new AnnotationConfigApplicationContext(BackStageConfig.class) ;
         System.out.println( "spring background stage start..." );
-        AlertUserService s = (AlertUserService)ctx.getBean("alertUserServiceImpl") ;
+        AlertUserService s = (AlertUserService)ctx.getBean("AMQPUserServiceAlertImpl") ;
         User user = new User() ;
         user.setName("smalltown");
         user.setPassword("111222");

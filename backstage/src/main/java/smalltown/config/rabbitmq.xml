@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/rabbit"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- <connection-factory id="connectionFactory"/> -->
+	<connection-factory id="connectionFactory"
+		username="guest"
+		password="guest"
+		host="localhost"
+		port="5672"
+		/>
+<!-- 	<connection-factory id="connectionFactory"
+		host=""
+		port=""
+		username="guest"
+		password="guest"/> -->
+	<admin connection-factory="connectionFactory"/>
+
+	<queue id="userTestQueue" name="user.alerts"/>
+	<!-- <fanout-exchange name="user.fanout">
+		<bindings>
+			<binding queue="user.alerts"></binding>
+		</bindings>
+	</fanout-exchange> -->
+
+	<template
+		id="rabbitTemplate"
+		connection-factory="connectionFactory"
+		/>
+</beans:beans>

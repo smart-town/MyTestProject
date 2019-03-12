@@ -9,12 +9,12 @@ import smalltown.service.AlertUserService;
 
 @Service
 public class AlertUserServiceImpl implements AlertUserService {
-	@Autowired
-	JmsOperations jmsOperations ;
+//	@Autowired
+//	JmsOperations jmsOperations ;
 
 	@Override
 	public void sendUserService(User user) {
-		jmsOperations.convertAndSend(user);
+//		jmsOperations.convertAndSend(user);
 	}
 
 }
