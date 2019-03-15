@@ -15,31 +15,35 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 import smalltown.wscontroller.WebSocketTest01;
 
 @Configuration
-//@EnableWebSocketMessageBroker
+@EnableWebSocketMessageBroker
 @EnableWebSocket
-@ComponentScan(value= {"smalltown.wscontroller",})
-public class WebSocketConfig implements /* WebSocketMessageBrokerConfigurer, */ WebSocketConfigurer{
-	/*
-	 * @Override public void registerStompEndpoints(StompEndpointRegistry registry)
-	 * { registry.addEndpoint("/stomp").withSockJS() ; }
-	 *
-	 * @Override public void configureMessageBroker(MessageBrokerRegistry registry)
-	 * { registry.enableSimpleBroker("/queue", "/topic") ;
-	 * registry.setApplicationDestinationPrefixes("/app") ; }
-	 */
+@ComponentScan(value = { "smalltown.wscontroller", })
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer, WebSocketConfigurer {
 
-	//WebSocketConfigurer method. lower api
+	@Override
+	public void registerStompEndpoints(StompEndpointRegistry registry) {
+		registry.addEndpoint("/stomp").withSockJS();
+	}
+
+	@Override
+	public void configureMessageBroker(MessageBrokerRegistry registry) {
+		registry.enableSimpleBroker("/queue", "/topic");
+		registry.setApplicationDestinationPrefixes("/app");
+	}
+
+	// WebSocketConfigurer method. lower api
 	@Autowired
 	WebSocketTest01 test01;
+
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		System.out.println("\n*****增加 websocket 映射");
-		registry.addHandler(test01, "/test01").addInterceptors(websocketInterceptor()).setAllowedOrigins("*") ;
+		registry.addHandler(test01, "/test01").addInterceptors(websocketInterceptor()).setAllowedOrigins("*");
 	}
 
 	@Bean
-	public WebSocketInterceptor websocketInterceptor(){
-		return new WebSocketInterceptor() ;
+	public WebSocketInterceptor websocketInterceptor() {
+		return new WebSocketInterceptor();
 	}
 
 }

@@ -19,6 +19,7 @@ public class WebSocketTest01 extends AbstractWebSocketHandler {
 
 	public void handleTextMessage(WebSocketSession session,TextMessage message) throws Exception {
 		logger.info("\n*****WebSocket..Lower API..");
+		System.out.println("RECEIVE MSG:"+message.getPayload());
 		String msg = input.nextLine() ;
 		if(!msg.equals("")){
 			session.sendMessage(new TextMessage(msg));
