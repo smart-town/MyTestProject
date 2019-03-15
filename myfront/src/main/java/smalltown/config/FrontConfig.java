@@ -4,12 +4,11 @@ import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 
 @Configuration
-@Import({WebSocketConfig.class,})
+
 public class FrontConfig extends AbstractAnnotationConfigDispatcherServletInitializer{
 
 	@Override
@@ -26,7 +25,7 @@ public class FrontConfig extends AbstractAnnotationConfigDispatcherServletInitia
 	protected String[] getServletMappings() {
 		return new String[] {"/"};
 	}
-	
+
 	@Override
 	protected void customizeRegistration(Dynamic registration) {
 		registration.setMultipartConfig(new MultipartConfigElement("/home/smalltown/Code"));

@@ -14,6 +14,9 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 
 @Component
 public class WebSocketInterceptor implements HandshakeInterceptor{
+	public WebSocketInterceptor(){
+		System.out.println("\n**********\nWebSocketInterceptor\n*********");
+	}
 
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
@@ -24,6 +27,7 @@ public class WebSocketInterceptor implements HandshakeInterceptor{
 		 * serverRequest.getServletRequest().getSession(); if(session != null) {
 		 * attributes.put("username", session.getAttribute("username")) ; } }
 		 */
+		System.out.println("握手拦截请求...");
 		return true;
 	}
 
@@ -31,7 +35,7 @@ public class WebSocketInterceptor implements HandshakeInterceptor{
 	public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Exception exception) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }

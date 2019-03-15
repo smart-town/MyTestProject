@@ -3,12 +3,14 @@ package smalltown.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 
 import smalltown.model.UseViewResolver;
 
 @Configuration
 @ComponentScan(basePackages={"smalltown.service","smalltown.model"})
+@Import({WebSocketConfig.class,})
 public class ContextListenerConfig {
 	@Bean
 	@Profile("chooseViewResolver")

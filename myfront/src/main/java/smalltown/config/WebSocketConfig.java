@@ -1,6 +1,7 @@
 package smalltown.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -21,7 +22,7 @@ public class WebSocketConfig implements /* WebSocketMessageBrokerConfigurer, */ 
 	/*
 	 * @Override public void registerStompEndpoints(StompEndpointRegistry registry)
 	 * { registry.addEndpoint("/stomp").withSockJS() ; }
-	 * 
+	 *
 	 * @Override public void configureMessageBroker(MessageBrokerRegistry registry)
 	 * { registry.enableSimpleBroker("/queue", "/topic") ;
 	 * registry.setApplicationDestinationPrefixes("/app") ; }
@@ -30,12 +31,15 @@ public class WebSocketConfig implements /* WebSocketMessageBrokerConfigurer, */ 
 	//WebSocketConfigurer method. lower api
 	@Autowired
 	WebSocketTest01 test01;
-	@Autowired
-	WebSocketInterceptor interceptor;
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(test01, "/test01").addInterceptors(interceptor).setAllowedOrigins("*") ;
-		
+		System.out.println("\n*****增加 websocket 映射");
+		registry.addHandler(test01, "/test01").addInterceptors(websocketInterceptor()).setAllowedOrigins("*") ;
 	}
-	
+
+	@Bean
+	public WebSocketInterceptor websocketInterceptor(){
+		return new WebSocketInterceptor() ;
+	}
+
 }
