@@ -4,9 +4,12 @@ import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+
 @Configuration
+@Import({WebSocketConfig.class,})
 public class FrontConfig extends AbstractAnnotationConfigDispatcherServletInitializer{
 
 	@Override
