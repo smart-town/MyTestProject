@@ -1,30 +1,172 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>LOGIN</title>
 <script src="https://cdn.bootcss.com/sockjs-client/1.3.0/sockjs.js"></script>
 <script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>
 <style>
-	header {
+div.login-main {
+	border: 1px solid lightblue;
+	border-radius: 10px;
+	width: 50%;
+	height: 200px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 
-	}
+.login-main label {
+	display: inline-block;
+	width: 100px;
+	text-align: right;
+}
+
+.login-main>div {
+	margin-top: 10px;
+}
+
+#login {
+	display: inline-block;
+	width: 100px;
+	height: 35px;
+	text-align: center;
+	border: 1px solid lightblue;
+	border-radius: 15px;
+	background: lightblue;
+	font-size: 20px;
+	color: white;
+	
+	outline: none;
+}
+
+#login:hover {
+	background: skyblue;
+	cursor: pointer;
+}
+
+div.info{
+	border: 1px dashed lightblue;
+	font-size: 20px;
+	text-align: center;
+	width: 50%;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 auto;
+	margin-bottom: 1rem;
+	
+	position: relative;
+}
+.ws-state {
+	position: absolute;
+	top: 10px ;
+	left: 10px;
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+}
+.ws-state-online {
+	background-color: green;
+}
+.ws-state-offline {
+	background-color: red;
+}
 </style>
 </head>
 <body>
-	<header>
-		登录页面
-	</header>
-<script>
-	var url = "http://" + window.location.host + "/myfront/stomp";
-	var sock = new SockJS(url);
-	console.log("sockjs:",sock);
-	var stomp = Stomp.over(sock) ;
-	var payload = JSON.stringify({"message":"Hello!"});
-	stomp.connect("guest","guest",function(frame){
-		stomp.send("/app/login",{},payload) ;
-	})
-</script>
+	<div class="info" id="div-info">
+		INFORM:<span id="loginAdvice"></span><span id="connectState" class="ws-state ws-state-offline" title="stomp state"></span>
+	</div>
+	<div class="login-main">
+		<div>
+			<label for="username">User Name:</label> 
+			<input type="text" id="username" />
+		</div>
+		<div>
+			<label for="password">Password:</label> 
+			<input type="password" id="password" />
+		</div>
+		<div>
+			<input type="submit" value="LOGIN" id="login" />
+		</div>
+	</div>
+
+	<script>
+		var username = document.getElementById("username");
+		var password = document.getElementById("password");
+		var loginButton = document.getElementById("login");
+		//loginButton.addEventListener("click", login);
+		loginButton.addEventListener("click", getInfo);
+
+		var loginAdvice = document.getElementById("loginAdvice");
+		var divInfo = document.getElementById("div-info") ;
+		divInfo.addEventListener("click", getInfo) ;
+		
+		var connectState = document.getElementById("connectState") ;
+
+		var url = "http://" + window.location.host + "/myfront/stomp";
+		var sock = new SockJS(url);
+		console.log("sockjs:", sock);
+		var stomp = Stomp.over(sock);
+		var state = stomp.ws; //stomp's sockJs object
+
+		var payload = JSON.stringify({
+			"message" : "Hello!"
+		});
+		stomp.connect("guest", "guest", stompConnected);
+
+		function stompConnected(frame) {
+			console.log(">>>>>Stomp Connected");
+			//state
+			websocketOpen();
+			
+			stomp.subscribe("/queue/login", handleLogin);
+			stomp.subscribe("/topic/loginInfo", handleInfo);
+		}
+
+		function login() {
+			if (check()) {
+				let data = {
+					"username" : username.value,
+					"password" : password.value
+				};
+				stomp.send("/app/login", {}, JSON.stringify(data));
+			}
+		}
+		function handleLogin(data) {
+			console.log("<<<<<Login Get Info:", data);
+		}
+		function handleInfo(data) {
+			console.log("<<<<<LoginInfo Get Info:", data);
+			data = data.body;
+			loginAdvice.innerHTML = JSON.parse(data)["message"];
+		}
+		function check() {
+			let name = username.value;
+			let pwd = password.value;
+			if (name === "" || pwd === "") {
+				alert("Please input username or password");
+				return false;
+			}
+			return true;
+		}
+		function getInfo(){
+			stomp.send("/app/loginInfo", {}, "getInfo");
+		}
+		
+		function websocketOpen(){
+			console.log("Open...") ;
+			connectState.setAttribute("class","ws-state ws-state-online") ;
+		}
+		function websocketClose(){
+			console.log("Close...") ;
+			connectState.setAttribute("class","ws-state ws-state-offline") ;
+		}
+	</script>
 </body>
 </html>

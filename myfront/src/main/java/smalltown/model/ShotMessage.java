@@ -11,4 +11,8 @@ public class ShotMessage {
 		this.message = message;
 	}
 
+	@Override
+	public String toString() {
+		return "ShotMessage [message=" + message + "]";
+	}
 }
