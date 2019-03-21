@@ -22,7 +22,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 @Configuration
-@ComponentScan(basePackages = { "smalltown.controller" })
+@ComponentScan(basePackages={"smalltown.controller"})
 @EnableWebMvc
 public class DispatcherServletConfig implements WebMvcConfigurer {
 
@@ -54,6 +54,7 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
 	@Bean
 	@Profile("chooseViewResolver")
 	public SpringTemplateEngine templateEngine(ITemplateResolver templateResolver) {
+		System.out.println("[chooseViewResolver]-viewResolver");
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		templateEngine.setTemplateResolver(templateResolver);
 		return templateEngine;
@@ -62,6 +63,7 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
 	@Bean
 	@Profile("chooseViewResolver")
 	public ITemplateResolver templateResolver() {
+		System.out.println("[chooseViewResolver]-viewResolver");
 		WebApplicationContext web = ContextLoader.getCurrentWebApplicationContext();
 		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(web.getServletContext());
 		templateResolver.setPrefix("/WEB-INF/thymeleaf/");

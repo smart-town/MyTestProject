@@ -8,7 +8,6 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 
 @Configuration
-
 public class FrontConfig extends AbstractAnnotationConfigDispatcherServletInitializer{
 
 	@Override

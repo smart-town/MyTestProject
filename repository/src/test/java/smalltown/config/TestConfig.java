@@ -15,7 +15,6 @@ import smalltown.repositoryimpl.UserRepositoryJpaAuto;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=RepositoryConfig.class)
-@Ignore
 public class TestConfig {
 	@Autowired
 	@Qualifier("UserJap")
